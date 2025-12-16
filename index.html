@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-30TLBRTGXN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-30TLBRTGXN');
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -213,7 +222,11 @@
         <div class="price-note">
           This software is sold as a complete project. Pricing depends on scope, exclusivity and delivery terms.
         </div>
-        <a href="mailto:techreboost@gmail.com" class="btn-primary btn-full">Request acquisition details</a>
+        <a href="mailto:techreboost@gmail.com"
+          class="btn-primary btn-full"
+          onclick="gtag('event', 'acquire_click', { event_category: 'conversion' });">
+          Request acquisition details
+        </a>
       </div>
 
       <div class="pricing-extra">
