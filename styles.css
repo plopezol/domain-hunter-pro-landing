@@ -11,6 +11,7 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 /* Fade-in Apple Style */
@@ -28,10 +29,7 @@ body {
 /* NAV */
 .nav {
   width: 100%;
-  padding: 20px 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 20px 0;
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.92);
@@ -39,19 +37,52 @@ body {
   -webkit-backdrop-filter: blur(14px);
   z-index: 9999;
   border-bottom: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+
+  /* ✅ Margen lateral tipo Apple (sin pegar a los bordes) */
+  padding-left: 48px;
+  padding-right: 48px;
+
+  /* ✅ Fallback: si NO existe .nav-inner en el HTML, que el nav siga funcionando */
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav .logo {
   font-size: 20px;
   font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ✅ Fallback layout: si el HTML no tiene .nav-inner, fuerza izquierda/derecha */
+.nav .logo {
+  margin-right: auto;
+}
+
+.nav-links {
+  margin-left: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .nav-links a {
-  margin-left: 25px;
   text-decoration: none;
   color: #555;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 /* HERO (versión antigua centrada, por si algún selector lo usa) */
@@ -592,8 +623,10 @@ section {
 /* ----------------------------- */
 
 .mockups-section {
-  padding: 140px 20px 180px;
+  padding: 140px 20px 200px;
   text-align: center;
+  position: relative;
+  overflow: visible;
 }
 
 .mockups-section .section-title {
@@ -612,8 +645,9 @@ section {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  padding: 40px 0 160px;
-  overflow: visible !important;
+  padding: 160px 0 180px;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 /* SLIDER: centra usando translateX, sin ajustes laterales rotos */
@@ -623,16 +657,25 @@ section {
   gap: 120px;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
+  max-width: 100%;
+  justify-content: center;
 }
 
 /* SLIDE INDIVIDUAL */
 .mockup-slide {
   flex: 0 0 auto;
-  width: min(900px, 80vw);
+  width: min(720px, 70vw);
   text-align: center;
   position: relative;
   transition: opacity .4s ease, transform .4s ease, filter .4s ease;
   padding-bottom: 40px;
+  z-index: 2;
+}
+
+.mockup-slide:not(.active):nth-child(n+4),
+.mockup-slide:not(.active):nth-child(-n+1) {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* SOMBRA COMPLETA – sin cortes */
@@ -644,6 +687,8 @@ section {
   filter:
     drop-shadow(0px 20px 55px rgba(0,0,0,0.25))
     drop-shadow(0px 10px 25px rgba(0,0,0,0.15));
+  position: relative;
+  z-index: 1;
 }
 
 /* GLOW Apple */
@@ -657,7 +702,7 @@ section {
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 70%, transparent 100%);
   filter: blur(90px);
-  z-index: -1;
+  z-index: 1;
 }
 
 /* SLIDE ACTIVO */
@@ -854,4 +899,89 @@ section {
 /* Hover efecto premium */
 .how-item:hover {
   transform: translateY(-6px);
+}
+
+/* ===================================== */
+/* MOBILE FIXES – Prevent horizontal overflow */
+/* ===================================== */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero-premium {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* MOCKUPS SLIDER */
+  .mockups-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .mockup-viewport {
+    max-width: 100vw;
+    overflow: hidden !important;
+  }
+
+  .mockup-slider {
+    width: 100%;
+    gap: 40px;
+    max-width: 100%;
+  }
+
+  .mockup-slide {
+    width: 90vw;
+    max-width: 90vw;
+  }
+
+  .mockup-slide:not(.active) {
+    opacity: 0;
+  }
+
+  .mockup-slide img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* INCLUDED MODAL */
+  .included-modal-content {
+    width: 92vw;
+    max-width: 92vw;
+    padding: 24px 20px;
+  }
+
+  .included-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* PRICING */
+  .price-box {
+    width: 100%;
+    max-width: 92vw;
+  }
+}
+@media (max-width: 768px) {
+  .nav {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .nav-inner {
+    padding: 0;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+  }
 }
