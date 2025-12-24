@@ -60,9 +60,13 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#mockups" class="btn-primary hero-main-btn">View live demo</a>
-          <a href="#pricing" class="btn-secondary hero-secondary-btn">Discuss acquisition</a>
-        </div>
+  <a href="#mockups" class="btn-primary hero-main-btn">View live demo</a>
+  <a href="#pricing" class="btn-secondary hero-secondary-btn">Discuss acquisition</a>
+
+  <button id="open-video-modal" class="hero-video-btn">
+    ▶ Watch 40s product demo
+  </button>
+</div>
 
         <p class="hero-disclaimer small-note">
           *Demo environment. External SEO APIs (Ahrefs, Moz, Majestic…) are not included and must be configured by the buyer.
@@ -286,7 +290,19 @@
       </p>
     </div>
   </div>
+<!-- VIDEO MODAL -->
+<div id="video-modal" class="video-modal">
+  <div class="video-modal-content">
+    <button id="close-video-modal" class="video-close">×</button>
 
+    <video
+      src="assets/videolanding.mov"
+      controls
+      playsinline
+      preload="metadata"
+    ></video>
+  </div>
+</div>
 
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox">

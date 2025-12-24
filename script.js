@@ -125,3 +125,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* ============================================================
+   VIDEO MODAL
+============================================================ */
+
+const videoModal = document.getElementById("video-modal");
+const openVideoBtn = document.getElementById("open-video-modal");
+const closeVideoBtn = document.getElementById("close-video-modal");
+
+if (videoModal && openVideoBtn && closeVideoBtn) {
+  openVideoBtn.addEventListener("click", () => {
+    videoModal.classList.add("active");
+  });
+
+  closeVideoBtn.addEventListener("click", () => {
+    videoModal.classList.remove("active");
+    const video = videoModal.querySelector("video");
+    if (video) video.pause();
+  });
+
+  videoModal.addEventListener("click", (e) => {
+    if (e.target === videoModal) {
+      videoModal.classList.remove("active");
+      const video = videoModal.querySelector("video");
+      if (video) video.pause();
+    }
+  });
+}
